@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchGreeting } from '../actions';
 
@@ -15,16 +16,16 @@ function Greeting({ greeting, fetchGreeting }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    greeting: state.greeting,
-  };
+Greeting.propTypes = {
+  fetchGreeting: PropTypes.func.isRequired,
+  greeting: PropTypes.string.isRequired,
 };
+const mapStateToProps = (state) => ({
+  greeting: state.greeting,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchGreeting: () => dispatch(fetchGreeting()),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  fetchGreeting: () => dispatch(fetchGreeting()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Greeting);
